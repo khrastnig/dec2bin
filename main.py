@@ -5,7 +5,7 @@ from PyQt5.QtCore import Qt, QSize, QTimer
 
 
 # Klasse für das Hauptfenster
-class MyWindow(QMainWindow):
+class MyWindow(QMainWindow): # Beginn der Klase mit 2 Funktionen
     def __init__(self):
 
         # Konstruktor von QMainWindow aufrufen
@@ -16,35 +16,45 @@ class MyWindow(QMainWindow):
         wid = QWidget(self)
         self.setCentralWidget(wid)
 
-        vlayout = QVBoxLayout()
+        vlayout = QVBoxLayout()  # Layout vertikale Box // es geht immer von aussen nach innen
         wid.setLayout(vlayout)
 
         self.lcd_number = QLCDNumber(2, wid)
-        vlayout.addWidget(self.lcd_number)
+        vlayout.addWidget(self.lcd_number)  #  nummernblock // die lcd_nummern werdenin die vlayout eingelesen
 
         hlayout = QHBoxLayout()
         vlayout.addLayout(hlayout)
 
-        self.checkboxes = [QCheckBox(wid), QCheckBox(wid), QCheckBox(wid), QCheckBox(wid)]
-        for index, cb in enumerate(self.checkboxes):
+        #self.checkboxes = ["8":QCheckBox(wid), "4":QCheckBox(wid), "2":QCheckBox(wid), "1":QCheckBox(wid)] #ein array voller checkboxes
+        self.checkboxes = [QCheckBox(wid), QCheckBox(wid), QCheckBox(wid), QCheckBox(wid)] #ein array voller checkboxes
+        #for index, cb in enumerate(self.checkboxes):   #den index brauchen wir hier noch nicht, aber dann bei der Umrechnung
+        for cb in self.checkboxes:                     
              hlayout.addWidget(cb)
              cb.clicked.connect(self.bin2dec)
+             cb.setStyleSheet("background-color: rgb(127, 127, 127)")
 
 
-    def bin2dec(self):
+    def bin2dec(self):  # hier wird die Umrechnung vorgenommen // jede memberfunktion braucht das self!
         value = 0
+        #numpy. flip(index) kehrt 
         for index, cb in enumerate(self.checkboxes):
-            if cb.isChecked():
-                value+=1
+            #for cb in reversed(list(self.checkboxes)):                
+            if cb.isChecked():  #wenn angeklickt, dann berücksichtige sie
+                cb.setStyleSheet("background-color: rgb(255, 0, 0)")
+                exponents=4-index-1
+                value+=2**exponents        # um hochzalen zu rechnen, 2hoch3 =>  2**3 in p
         self.lcd_number.display(value)
 
 
-app = QtWidgets.QApplication([])
+app = QtWidgets.QApplication([]) # Start der Hauptfunktion
 win = MyWindow()
 win.show()
 app.exec_()
 
+
+
 ################### zweiter Teil ########
+'''
 # Slider + Label Anzeige Dezimalwert
 self.slider = QSlider(Qt.Horizontal)
 self.label = QLabel('0') 
@@ -65,4 +75,4 @@ vbox.addLayout(sliderbox)
 vbox.addLayout(bitbox)
 
 # vbox anzeigen in QWidget
-self.setLayout(vbox)
+self.setLayout(vbox)'''
