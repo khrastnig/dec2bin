@@ -2,8 +2,15 @@
 from PyQt5 import QtCore, QtWidgets
 from PyQt5.QtWidgets import QMainWindow, QWidget, QVBoxLayout, QHBoxLayout, QLabel, QLCDNumber, QCheckBox, QSlider
 from PyQt5.QtCore import Qt, QSize, QTimer
+from gpiozero import LED, LEDBoard
+from signal import pause
 #from Tkinter import *
 
+#self.leds = LEDBoard(18, 23, 24, 25)
+leds1=LED(18)
+leds2=LED(23)
+leds3=LED(24)
+leds4=LED(25)
 
 # Klasse für das Hauptfenster
 class MyWindow(QMainWindow): # Beginn der Klase mit 2 Funktionen
@@ -53,21 +60,28 @@ class MyWindow(QMainWindow): # Beginn der Klase mit 2 Funktionen
         #ab hier nun die zuweisung zu den QLabel
         if value == 1 or value == 3 or value == 5 or value == 7 or value == 9 or value == 11 or value == 13 or value == 15:
             self.bitlabels[3].setStyleSheet("background-color: rgb(255, 0, 0)")
+            leds1.on()
         else:
             self.bitlabels[3].setStyleSheet("background-color: rgb(127, 127, 127)")
-        
+            leds1.off()
         if value == 2 or value == 3 or value == 6 or value == 7 or value == 10 or value == 11 or value == 14 or value == 15:
             self.bitlabels[2].setStyleSheet("background-color: rgb(255, 0, 0)")
+            leds2.on()
         else:
             self.bitlabels[2].setStyleSheet("background-color: rgb(127, 127, 127)")
+            leds2.off()
         if value == 4 or value == 5 or value == 6 or value == 7 or value == 12 or value == 13 or value == 14 or value == 15:
             self.bitlabels[1].setStyleSheet("background-color: rgb(255, 0, 0)")
+            leds3.on()
         else:
             self.bitlabels[1].setStyleSheet("background-color: rgb(127, 127, 127)")
+            leds3.off()
         if value == 8 or value == 9 or value == 10 or value == 11 or value == 12 or value == 13 or value == 14 or value == 15:
             self.bitlabels[0].setStyleSheet("background-color: rgb(255, 0, 0)")
+            leds4.on()
         else:
             self.bitlabels[0].setStyleSheet("background-color: rgb(127, 127, 127)")
+            leds4.off()
 
 app = QtWidgets.QApplication([]) # Start der Hauptfunktion
 win = MyWindow()
