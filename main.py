@@ -26,7 +26,7 @@ class MyWindow(QMainWindow): # Beginn der Klase mit 2 Funktionen
         wid.setLayout(sliderbox)
         self.slider = QSlider(Qt.Horizontal,wid)
         self.slider.setRange(0, 15)
-        #bitlabel.clicked.connect(self.bin2dec)
+        self.slider.valueChanged[int].connect(self.changeValue)
         self.label = QLabel('0') 
         sliderbox.addWidget(self.slider)
         sliderbox.addWidget(self.label)
@@ -36,30 +36,38 @@ class MyWindow(QMainWindow): # Beginn der Klase mit 2 Funktionen
        
         #self.bitlabels = [QCheckBox(wid), QCheckBox(wid), QCheckBox(wid), QCheckBox(wid)] #ein array voller checkboxes
         self.bitlabels = [QLabel("8"), QLabel("4"), QLabel("2"), QLabel("1")] #ein array voller checkboxes
-        # hier bitlabels erstellen      
+        
+        
+
+
+# hier bitlabels erstellen      
         bitbox = QHBoxLayout()
         vbox.addLayout(bitbox)   
-        for bitlabel in self.bitlabels:
+        for index, bitlabel in enumerate(self.bitlabels):
             bitbox.addWidget(bitlabel)            
-            bitlabel.setStyleSheet("background-color: rgb(127, 127, 127);""selection-color: rgb(255, 0, 0);""text-aling: center;""border-width: 2px")
-            
+            #bitlabel.setStyleSheet("background-color: rgb(127, 127, 127)")            
+    def changeValue(self, value):  # hier wird die Umrechnung vorgenommen // jede memberfunktion braucht das self!
+        showValue=str(value)
+        #print(value)
+        self.label.setText(showValue)
+        #ab hier nun die zuweisung zu den QLabel
+        if value == 1 or value == 3 or value == 5 or value == 7 or value == 9 or value == 11 or value == 13 or value == 15:
+            self.bitlabels[3].setStyleSheet("background-color: rgb(255, 0, 0)")
+        else:
+            self.bitlabels[3].setStyleSheet("background-color: rgb(127, 127, 127)")
         
-            
-            
-    #def bin2dec(self):  # hier wird die Umrechnung vorgenommen // jede memberfunktion braucht das self!
-        #value = 0
-        #numpy. flip(index) reverse etc hat nicht funktioniert
-        #for self.slider
-        #for index, bitlabel in enumerate(self.bitlabels):
-            #for cb in reversed(list(self.checkboxes)):                
-            #if bitlabel.isChecked():  #wenn angeklickt, dann berücksichtige sie
-                #bbitlabel.setStyleSheet("background-color: rgb(255, 0, 0)")
-                #exponents=4-index-1  # self.checkboxes.len() sowie .count() und .length() hat nicht funktioniert
-                #value+=2**exponents        # um hochzahlen zu rechnen, 2hoch3 =>  2**3 in p
-                #showValue=str(value)
-        #self.label.setText(showValue)
-        #self.setLayout(value)
-
+        if value == 2 or value == 3 or value == 6 or value == 7 or value == 10 or value == 11 or value == 14 or value == 15:
+            self.bitlabels[2].setStyleSheet("background-color: rgb(255, 0, 0)")
+        else:
+            self.bitlabels[2].setStyleSheet("background-color: rgb(127, 127, 127)")
+        if value == 4 or value == 5 or value == 6 or value == 7 or value == 12 or value == 13 or value == 14 or value == 15:
+            self.bitlabels[1].setStyleSheet("background-color: rgb(255, 0, 0)")
+        else:
+            self.bitlabels[1].setStyleSheet("background-color: rgb(127, 127, 127)")
+        if value == 8 or value == 9 or value == 10 or value == 11 or value == 12 or value == 13 or value == 14 or value == 15:
+            self.bitlabels[0].setStyleSheet("background-color: rgb(255, 0, 0)")
+        else:
+            self.bitlabels[0].setStyleSheet("background-color: rgb(127, 127, 127)")
 
 app = QtWidgets.QApplication([]) # Start der Hauptfunktion
 win = MyWindow()
