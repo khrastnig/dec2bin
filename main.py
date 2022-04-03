@@ -6,7 +6,7 @@ from gpiozero import LED, LEDBoard
 from signal import pause
 #from Tkinter import *
 
-#self.leds = LEDBoard(18, 23, 24, 25)
+#leds = LEDBoard(18, 23, 24, 25)
 leds1=LED(18)
 leds2=LED(23)
 leds3=LED(24)
@@ -36,7 +36,7 @@ class MyWindow(QMainWindow): # Beginn der Klase mit 2 Funktionen
         self.slider.setRange(0, 15)        
         self.slider.setStyleSheet("QSlider::handle:horizontal {height: 18px;}"
             "QSlider::sub-page:horizontal {background-color:rgb(0,100,255);}"
-            "QSlider::handle:horizontal {background-color: white; border: 1px solid gray; border-radius: 4px; width: 18px;  margin: 0 ,0; }")  # die größeneinstellung des handler funktioniert irgendwie nicht
+            "QSlider::handle:horizontal {background-color: white; border: 1px solid gray; border-radius: 4px; width: 18px;  height: 18px;}")  # die größeneinstellung des handler funktioniert irgendwie nicht
         self.slider.setTickInterval(1)
         self.slider.setTickPosition(QSlider.TicksBelow)
         self.slider.valueChanged[int].connect(self.changeValue)
@@ -48,7 +48,7 @@ class MyWindow(QMainWindow): # Beginn der Klase mit 2 Funktionen
 
        
         #self.bitlabels = [QCheckBox(wid), QCheckBox(wid), QCheckBox(wid), QCheckBox(wid)] #ein array voller checkboxes
-        self.bitlabels = [QLabel("8"), QLabel("4"), QLabel("2"), QLabel("1")] #ein array voller checkboxes
+        self.bitlabels = [QLabel("8"), QLabel("4"), QLabel("2"), QLabel("1")] #ein array voller bitlabels
         
         
 
@@ -69,29 +69,40 @@ class MyWindow(QMainWindow): # Beginn der Klase mit 2 Funktionen
             
             
     def changeValue(self, value):  # hier nun die aufzurufende funktion
-        showValue=str(value)
+        #showValue=str(value)
         #print(value)
-        self.label.setText(showValue)
+        self.label.setText(str(value))
         #ab hier nun die zuweisung zu den QLabel
-        if value == 1 or value == 3 or value == 5 or value == 7 or value == 9 or value == 11 or value == 13 or value == 15:
+        ar1=[1,3,5,7,9,11,13,15]
+        if value in ar1:
+        #if value == 1 or value == 3 or value == 5 or value == 7 or value == 9 or value == 11 or value == 13 or value == 15:
             self.bitlabels[3].setStyleSheet("background-color: rgb(255, 0, 0)")
             leds1.on()
+            #leds[0].on()
         else:
             self.bitlabels[3].setStyleSheet("background-color: rgb(127, 127, 127)")
             leds1.off()
-        if value == 2 or value == 3 or value == 6 or value == 7 or value == 10 or value == 11 or value == 14 or value == 15:
+            #leds[0].off()
+        ar2=[2,3,6,7,10,11,14,15]    
+        if value in ar2:
+        #if value == 2 or value == 3 or value == 6 or value == 7 or value == 10 or value == 11 or value == 14 or value == 15:
             self.bitlabels[2].setStyleSheet("background-color: rgb(255, 0, 0)")
             leds2.on()
+            #leds[1].on()
         else:
             self.bitlabels[2].setStyleSheet("background-color: rgb(127, 127, 127)")
             leds2.off()
-        if value == 4 or value == 5 or value == 6 or value == 7 or value == 12 or value == 13 or value == 14 or value == 15:
+        ar4=[4,5,6,7,12,13,14,15]
+        if value in ar4:
+        #if value == 4 or value == 5 or value == 6 or value == 7 or value == 12 or value == 13 or value == 14 or value == 15:
             self.bitlabels[1].setStyleSheet("background-color: rgb(255, 0, 0)")
             leds3.on()
         else:
             self.bitlabels[1].setStyleSheet("background-color: rgb(127, 127, 127)")
             leds3.off()
-        if value == 8 or value == 9 or value == 10 or value == 11 or value == 12 or value == 13 or value == 14 or value == 15:
+        ar8=[8,9,10,11,12,13,14,15]    
+        if value in ar8:
+        #if value == 8 or value == 9 or value == 10 or value == 11 or value == 12 or value == 13 or value == 14 or value == 15:    
             self.bitlabels[0].setStyleSheet("background-color: rgb(255, 0, 0)")
             leds4.on()
         else:
